@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="vocab_act_tv_title_text_color">#000</color>
+    <color name="rule_act_tv_title_text_color">#000</color>
+    <color name="gram_act_tv_title_text_color">#000</color>
+    <color name="task_act_tv_task_type_text_size">#000</color>
+    <color name="task_act_tv_answer_text_color">#000</color>
+    <color name="task_act_tv_question_text_color">#000</color>
+    <color name="task_act_tv_rule_text_color">#000</color>
+</resources>

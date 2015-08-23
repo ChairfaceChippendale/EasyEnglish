@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Easy English</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="version_num">v. 0.1</string>
+    <string name="main_act_btn_vocabulary_text">Vocabulary</string>
+    <string name="main_act_btn_grammar_text">Grammar</string>
+    <string name="main_act_btn_sign_in_text">Sign in</string>
+    <string name="title_activity_vocabulary">Vocabulary</string>
+    <string name="title_activity_grammar">Grammar</string>
+    <string name="vocab_act_tv_title_text">Packs</string>
+    <string name="vocab_act_btn_start_text">Start</string>
+    <string name="title_activity_rule">Rule</string>
+    <string name="rule_act_tv_title_text">Rule of gramma</string>
+    <string name="rule_act_tv_rule_text">There must be rule of gramma</string>
+    <string name="gram_act_tv_title_text">Topics</string>
+    <string name="gram_act_btn_start_text">Start test</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_task">Task</string>
+    <string name="task_act_btn_tip_text">Tip</string>
+    <string name="task_act_btn_check_text">Check</string>
+    <string name="task_act_btn_next_text">Next ></string>
+    <string name="task_act_tv_task_type_text">Complete sentence:</string>
+    <string name="title_activity_add_word">AddWord</string>
+</resources>
