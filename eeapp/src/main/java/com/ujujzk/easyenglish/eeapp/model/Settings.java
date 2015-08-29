@@ -1,10 +1,13 @@
-package com.ujujzk.easyenglish.eeapp;
+package com.ujujzk.easyenglish.eeapp.model;
 
 
-public class Settings {
+public class Settings extends Base {
 
     private int fontSize;
     private int mainColor;
+
+    public Settings() {
+    }
 
     public int getFontSize() {
         return fontSize;

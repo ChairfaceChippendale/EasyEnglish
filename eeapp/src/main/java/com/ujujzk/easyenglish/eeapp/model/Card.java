@@ -1,14 +1,15 @@
-package com.ujujzk.easyenglish.eeapp;
+package com.ujujzk.easyenglish.eeapp.model;
 
-public class Card {
+public class Card extends Base {
 
     private String front;
     private String back;
     private boolean learned;
 
 
-    public Card(String front, String back) {
+    public Card() {}
 
+    public Card(String front, String back) {
         this.front = front;
         this.back = back;
         this.learned = false;

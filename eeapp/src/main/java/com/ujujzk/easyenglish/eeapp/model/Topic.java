@@ -1,17 +1,17 @@
-package com.ujujzk.easyenglish.eeapp;
+package com.ujujzk.easyenglish.eeapp.model;
 
 
 import java.util.List;
 
-public class Topic {
+public class Topic extends Base {
 
     private String title;
     private List<Task> tasks;
     private String rules;
 
 
-
-
+    public Topic() {
+    }
 
     public void addTask (Task task) {
         tasks.add(task);

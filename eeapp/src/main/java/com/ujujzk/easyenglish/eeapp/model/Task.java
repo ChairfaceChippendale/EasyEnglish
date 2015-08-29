@@ -1,12 +1,15 @@
-package com.ujujzk.easyenglish.eeapp;
+package com.ujujzk.easyenglish.eeapp.model;
 
-public class Task {
+public class Task extends Base {
 
     private int id;
     private String question;
     private String answer;
     private String rule;
     private boolean isDone;
+
+    public Task() {
+    }
 
     public Task(int id, String question, String answer, String rule) {
         this.id = id;

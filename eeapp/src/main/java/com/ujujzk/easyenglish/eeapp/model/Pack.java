@@ -1,13 +1,15 @@
-package com.ujujzk.easyenglish.eeapp;
+package com.ujujzk.easyenglish.eeapp.model;
 
 
 import java.util.List;
 
-public class Pack {
+public class Pack extends Base {
 
     private String title;
     private List<Card> cards;
 
+    public Pack() {
+    }
 
     public void addCard (Card newCard) {
         cards.add(newCard);
