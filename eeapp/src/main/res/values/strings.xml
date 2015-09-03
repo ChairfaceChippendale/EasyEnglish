@@ -23,4 +23,5 @@
     <string name="task_act_btn_next_text">Next ></string>
     <string name="task_act_tv_task_type_text">Complete sentence:</string>
     <string name="title_activity_add_word">AddWord</string>
+    <string name="title_activity_word_slide">LearnWord</string>
 </resources>
