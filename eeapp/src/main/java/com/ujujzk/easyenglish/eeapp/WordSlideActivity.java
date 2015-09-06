@@ -10,17 +10,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 
-/**
- * Created by root on 02.09.15.
- */
+
 public class WordSlideActivity extends Activity {
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new WordSlideLearnView(this));
+
+        setContentView(R.layout.word_slide_act);
+
+        FrameLayout parentLayoutForWordLearn = (FrameLayout) findViewById(R.id.wslide_act_fl_parent_layout_for_word_learn);
+        parentLayoutForWordLearn.addView(new WordSlideLearnView(this));
+
     }
 
     class WordSlideLearnView extends View {
@@ -174,10 +178,6 @@ public class WordSlideActivity extends Activity {
             }
             return true;
         }
-
-
-
-
 
 
 

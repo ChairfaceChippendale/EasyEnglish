@@ -7,4 +7,5 @@
     <color name="task_act_tv_answer_text_color">#000</color>
     <color name="task_act_tv_question_text_color">#000</color>
     <color name="task_act_tv_rule_text_color">#000</color>
+    <color name="wslide_act_tv_title_text_color">#000</color>
 </resources>
