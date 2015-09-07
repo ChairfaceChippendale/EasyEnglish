@@ -11,19 +11,42 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 
 public class WordSlideActivity extends Activity {
+
+    ImageView goBack;
+    ImageView prononciation;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.word_slide_act);
 
         FrameLayout parentLayoutForWordLearn = (FrameLayout) findViewById(R.id.wslide_act_fl_parent_layout_for_word_learn);
         parentLayoutForWordLearn.addView(new WordSlideLearnView(this));
+
+        goBack = (ImageView) findViewById(R.id.wslide_act_img_go_back);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        prononciation = (ImageView) findViewById(R.id.wslide_act_img_prononciation);
+        prononciation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //WORD PRONONSIATION
+                //http://api.forvo.com/documentation/word-pronunciations/
+
+            }
+        });
+
 
     }
 

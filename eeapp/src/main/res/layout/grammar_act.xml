@@ -49,6 +49,7 @@
             />
 
     <ListView
+            android:id="@+id/gram_act_lv_topics_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/gram_act_tv_title"

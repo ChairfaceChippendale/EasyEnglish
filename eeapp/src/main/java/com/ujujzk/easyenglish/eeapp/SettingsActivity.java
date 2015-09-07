@@ -1,6 +1,7 @@
 package com.ujujzk.easyenglish.eeapp;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends Activity {
 
     ImageView goBack;
 
