@@ -13,17 +13,38 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.ujujzk.easyenglish.eeapp.model.Card;
+
+import java.util.ArrayList;
+
 
 public class WordSlideActivity extends Activity {
 
-    ImageView goBack;
-    ImageView prononciation;
+    private static final boolean WORD_IS_LEARNED = true;
+    private static final boolean WORD_IS_NOT_LEARNED = false;
+
+    private static final boolean FRONT_SIDE = true;
+    private static final boolean BACK_SIDE = false;
+
+    private static final int STEPS_BACK = 4;
+
+    private ImageView goBack;
+    private ImageView prononciation;
+    private int currentCard;
+
+    private boolean side;
+    private ArrayList<Card> pack;
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_slide_act);
+
+        currentCard = 0;
+        side = FRONT_SIDE;
+
 
         FrameLayout parentLayoutForWordLearn = (FrameLayout) findViewById(R.id.wslide_act_fl_parent_layout_for_word_learn);
         parentLayoutForWordLearn.addView(new WordSlideLearnView(this));
@@ -121,7 +142,7 @@ public class WordSlideActivity extends Activity {
 
                     if (centerY < 1) {
                         selfMoveDirection = WordSlideLearnView.DO_NOT_MOVE;
-                        nextWordSlideLearnView();
+                        nextWordSlideLearnView(WORD_IS_LEARNED);
                         centerY = height / 2;
                         invalidate();
                     }
@@ -136,7 +157,7 @@ public class WordSlideActivity extends Activity {
 
                     if (centerY > height) {
                         selfMoveDirection = WordSlideLearnView.DO_NOT_MOVE;
-                        nextWordSlideLearnView();
+                        nextWordSlideLearnView(WORD_IS_NOT_LEARNED);
                         centerY = height / 2;
                         invalidate();
                     }
@@ -204,22 +225,23 @@ public class WordSlideActivity extends Activity {
 
 
 
-        private void nextWordSlideLearnView () {
+        private void nextWordSlideLearnView (boolean isLearned) {
 
-            if (text.compareTo("Word") == 0) {
-                text = "next Word";
-            } else {
-                text = "Word";
+            if (!isLearned) {
+                pack.add(currentCard+STEPS_BACK, pack.get(currentCard));
             }
-
+            currentCard++;
+            text = pack.get(currentCard).getFront();
         }
 
         private void translateWordSlideLearnView () {
 
-            if (text.compareTo("Word") == 0) {
-                text = "translate";
+            if (side == FRONT_SIDE) {
+                text = pack.get(currentCard).getBack();
+                side = BACK_SIDE;
             } else {
-                text = "Word";
+                text = pack.get(currentCard).getFront();
+                side = FRONT_SIDE;
             }
 
         }

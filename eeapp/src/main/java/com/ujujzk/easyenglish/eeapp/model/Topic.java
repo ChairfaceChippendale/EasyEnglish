@@ -1,16 +1,23 @@
 package com.ujujzk.easyenglish.eeapp.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Topic extends Base {
 
     private String title;
-    private List<Task> tasks;
+    private ArrayList<Task> tasks;
     private String rules;
 
 
     public Topic() {
+    }
+
+    public Topic(String title, ArrayList<Task> tasks, String rules) {
+        this.title = title;
+        tasks = new ArrayList<Task>(tasks);
+        this.rules = rules;
     }
 
     public void addTask (Task task) {

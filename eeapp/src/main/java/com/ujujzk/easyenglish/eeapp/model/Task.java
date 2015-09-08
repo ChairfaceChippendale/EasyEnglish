@@ -2,7 +2,8 @@ package com.ujujzk.easyenglish.eeapp.model;
 
 public class Task extends Base {
 
-    private int id;
+
+    private String taskType;
     private String question;
     private String answer;
     private String rule;
@@ -11,21 +12,21 @@ public class Task extends Base {
     public Task() {
     }
 
-    public Task(int id, String question, String answer, String rule) {
-        this.id = id;
+    public Task(String taskType, String question, String answer, String rule) {
+
+        this.taskType = taskType;
         this.question = question;
         this.answer = answer;
         this.rule = rule;
         this.isDone = false;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
+    public String getTaskType() { return taskType; }
+
+    public void setTaskType(String taskType) { this.taskType = taskType; }
+
 
     public String getQuestion() {
         return question;

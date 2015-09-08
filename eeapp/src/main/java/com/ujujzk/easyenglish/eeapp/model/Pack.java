@@ -1,19 +1,25 @@
 package com.ujujzk.easyenglish.eeapp.model;
 
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Pack extends Base {
 
     private String title;
-    private List<Card> cards;
+    private ArrayList<Card> cards;
 
     public Pack() {
     }
 
-    public void addCard (Card newCard) {
-        cards.add(newCard);
+    public Pack(String title, List<Card> cards) {
+        this.title = title;
+        cards = new ArrayList<Card>(cards);
+
     }
+
+
 
     private int getCardsNumber () {
         return cards.size();
@@ -22,8 +28,14 @@ public class Pack extends Base {
     public List<Card> getCards() {
         return cards;
     }
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
+    public void addCards(ArrayList<Card> cards) {
+        this.cards.addAll(cards);
+    }
+    public void addCard(Card card) {
+        this.cards.add(card);
+    }
+    public void removeCards() {
+        this.cards.clear();
     }
     public String getTitle() {
         return title;
