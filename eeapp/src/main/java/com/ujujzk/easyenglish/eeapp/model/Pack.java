@@ -8,14 +8,19 @@ import java.util.List;
 public class Pack extends Base {
 
     private String title;
-    private ArrayList<Card> cards;
+    private List<Card> cards;
 
     public Pack() {
     }
 
+    @Override
+    public String toString() {
+        return title;
+    }
+
     public Pack(String title, List<Card> cards) {
         this.title = title;
-        cards = new ArrayList<Card>(cards);
+        this.cards = new ArrayList<Card>(cards);
 
     }
 

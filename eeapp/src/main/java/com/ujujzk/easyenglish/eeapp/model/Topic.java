@@ -7,17 +7,17 @@ import java.util.List;
 public class Topic extends Base {
 
     private String title;
-    private ArrayList<Task> tasks;
-    private String rules;
+    private List<Task> tasks;
+    private String ruleId;
 
 
     public Topic() {
     }
 
-    public Topic(String title, ArrayList<Task> tasks, String rules) {
+    public Topic(String title, List<Task> tasks, String ruleId) {
         this.title = title;
-        tasks = new ArrayList<Task>(tasks);
-        this.rules = rules;
+        this.tasks = new ArrayList<Task>(tasks);
+        this.ruleId = ruleId;
     }
 
     public void addTask (Task task) {
@@ -41,13 +41,6 @@ public class Topic extends Base {
         this.title = title;
     }
 
-    public String getRules() {
-        return rules;
-    }
-
-    public void setRules(String rules) {
-        this.rules = rules;
-    }
 
 
 }

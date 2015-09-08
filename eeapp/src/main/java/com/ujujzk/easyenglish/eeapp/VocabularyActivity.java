@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.*;
+import com.ujujzk.easyenglish.eeapp.model.Pack;
+
+import java.util.ArrayList;
 
 
 public class VocabularyActivity extends Activity {
@@ -17,19 +17,37 @@ public class VocabularyActivity extends Activity {
     Button start;
     ImageView goBack;
     ListView packsList;
-    String [] packsTitles = {"U2","U3","U4","Cats","U6A","Cats tails"};
+    ArrayList<Pack> packs;
+    //String [] packsTitles = {"U2","U3","U4","Cats","U6A","Cats tails"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vocabulary_act);
 
+        packs = new ArrayList<Pack>();
+        packs.add(MockService.getPack());
+        packs.add(MockService.getPack());
+
+
+
         packsList = (ListView) findViewById(R.id.vocab_act_lv_packs_list);
         packsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        ArrayAdapter<String> packsListAdapter = new ArrayAdapter<String>(this,
+
+
+
+        ArrayAdapter<Pack> packsListAdapter = new ArrayAdapter<Pack>(this,
                 android.R.layout.simple_list_item_multiple_choice,
-                packsTitles);
+                packs);
+
+
+
+
+
+
         packsList.setAdapter(packsListAdapter);
+
+
 
         start = (Button) findViewById(R.id.vocab_act_btn_start);
         start.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +61,7 @@ public class VocabularyActivity extends Activity {
                     if (checkedPacksPositions.get(key)) {
 
                         //COLLECT ALL SELECTED PACKS AND DO WITH THEM SOMETHING
-                        Log.d("My TAG", packsTitles[key]);
+                        Log.d("My TAG", packs.get(key).getTitle());
 
                     }
                 }

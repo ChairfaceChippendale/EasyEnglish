@@ -4,7 +4,6 @@ public class Card extends Base {
 
     private String front;
     private String back;
-    private boolean learned;
 
 
     public Card() {}
@@ -12,7 +11,6 @@ public class Card extends Base {
     public Card(String front, String back) {
         this.front = front;
         this.back = back;
-        this.learned = false;
     }
 
     public String getFront() {
@@ -31,11 +29,4 @@ public class Card extends Base {
         this.back = back;
     }
 
-    public boolean isLearned() {
-        return learned;
-    }
-
-    public void setLearned(boolean learned) {
-        this.learned = learned;
-    }
 }

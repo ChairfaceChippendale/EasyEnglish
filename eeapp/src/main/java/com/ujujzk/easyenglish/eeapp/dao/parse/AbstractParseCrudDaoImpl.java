@@ -11,10 +11,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class AbstractParseCrudDaoImpl<Model extends Base> implements CrudDao<Model, String> {
@@ -83,6 +80,7 @@ public class AbstractParseCrudDaoImpl<Model extends Base> implements CrudDao<Mod
             return readWithRelationsThrowException(s);
         } catch (Exception e) {
             Log.e(getClass().getName(), e.getMessage() != null ? e.getMessage() : e.toString());
+            Log.d(getClass().getName(), e.getMessage() != null ? e.getMessage() : e.toString(), e);
         }
         return null;
     }
@@ -412,7 +410,7 @@ public class AbstractParseCrudDaoImpl<Model extends Base> implements CrudDao<Mod
         } catch (Exception e) {
             Log.e(getClass().getName(), e.getMessage() != null ? e.getMessage() : e.toString());
         }
-        return null;
+        return new ArrayList<Model>();
     }
 
     @Override
@@ -460,7 +458,7 @@ public class AbstractParseCrudDaoImpl<Model extends Base> implements CrudDao<Mod
         } catch (Exception e) {
             Log.e(getClass().getName(), e.getMessage() != null ? e.getMessage() : e.toString());
         }
-        return null;
+        return new ArrayList<Model>();
     }
 
 
@@ -471,7 +469,7 @@ public class AbstractParseCrudDaoImpl<Model extends Base> implements CrudDao<Mod
         } catch (Exception e) {
             Log.e(getClass().getName(), e.getMessage() != null ? e.getMessage() : e.toString());
         }
-        return null;
+        return new ArrayList<Model>();
     }
 
     @Override
@@ -520,7 +518,7 @@ public class AbstractParseCrudDaoImpl<Model extends Base> implements CrudDao<Mod
         } catch (Exception e) {
             Log.e(getClass().getName(), e.getMessage() != null ? e.getMessage() : e.toString());
         }
-        return null;
+        return new ArrayList<Model>();
     }
 
     @Override

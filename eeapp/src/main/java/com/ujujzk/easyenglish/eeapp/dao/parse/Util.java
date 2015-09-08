@@ -17,9 +17,9 @@ import java.util.*;
 public class Util {
 
     public static final Set<Class> CLASSES = new HashSet<Class>(Arrays.asList(
-            new Class[]{String.class, Integer.class, Date.class}));
+            new Class[] {String.class, Integer.class, Date.class}));
     public static final Set<Class> RELATIVE_CLASSES = new HashSet<Class>(Arrays.asList(
-            new Class[]{Topic.class, Card.class, Pack.class, Settings.class, Task.class, List.class}));
+            new Class[]{Topic.class, Card.class, Pack.class, Settings.class, Task.class, List.class, Rule.class}));
 
     public static Class getListGenericType(Field field) {
         ParameterizedType stringListType = (ParameterizedType) field.getGenericType();
@@ -50,7 +50,7 @@ public class Util {
             id = "" + ((int) (Math.random() * 1000000));
         } while(!ParseQuery.getQuery(clazz.getSimpleName())
                 .fromLocalDatastore()
-                .whereEqualTo("objectId", id)
+                .whereEqualTo("ObjectId", id)
                 .find().isEmpty());
         return id;
     }
@@ -71,7 +71,7 @@ public class Util {
             return ParseQuery.getQuery(clazz.getSimpleName()).get(id);
         } else {
             List<ParseObject> objects = ParseQuery.getQuery(clazz.getSimpleName())
-                    .fromLocalDatastore().whereEqualTo("objectId", id).find();
+                    .fromLocalDatastore().whereEqualTo("ObjectId", id).find();
             if(objects.size() == 1){
                 return objects.get(0);
             } else if(objects.size() == 0){
@@ -111,31 +111,46 @@ public class Util {
         for(Field field : getFieldsWithAccessible(clazz, CLASSES)){
             String fieldName = field.getName();
 
-            if(!isCloudMode && fieldName.equalsIgnoreCase("objectId") && idIsEmpty((String) field.get(base))){
+            if(!isCloudMode && fieldName.equals("objectId") && idIsEmpty((String) field.get(base))){
                 field.set(base, getIdForLocalDb(clazz));
             }
 
-            if(!isCloudMode && fieldName.equalsIgnoreCase("createdAt") && field.get(base) == null){
+            if(!isCloudMode && fieldName.equals("createdAt") && field.get(base) == null){
                 field.set(base, new Date());
             }
 
-            if(!isCloudMode && fieldName.equalsIgnoreCase("updatedAt")){
+            if(!isCloudMode && fieldName.equals("updatedAt")){
                 field.set(base, new Date());
             }
 
-            if(isCloudMode && (fieldName.equalsIgnoreCase("objectId") ||
-                    fieldName.equalsIgnoreCase("createdAt") ||
-                    fieldName.equalsIgnoreCase("updatedAt"))){
+            if(isCloudMode && (fieldName.equals("objectId") ||
+                    fieldName.equals("createdAt") ||
+                    fieldName.equals("updatedAt"))){
                 continue;
             }
 
-            if(po.has(fieldName)) {
+
+            if(!isCloudMode && fieldName.equals("objectId") && po.has("ObjectId")){
+                po.remove("ObjectId");
+            } else if (!isCloudMode && fieldName.equals("createdAt") && po.has("CreatedAt")){
+                po.remove("CreatedAt");
+            } else if (!isCloudMode && fieldName.equals("updatedAt") && po.has("UpdatedAt")){
+                po.remove("UpdatedAt");
+            } else if (po.has(fieldName)) {
                 po.remove(fieldName);
             }
 
             Object value = field.get(base);
             if(value != null) {
-                po.put(fieldName, value);
+                if (fieldName.equals("objectId") && !isCloudMode){
+                    po.put("ObjectId", value);
+                } else if (fieldName.equals("createdAt") && !isCloudMode){
+                    po.put("CreatedAt", value);
+                } else if (fieldName.equals("updatedAt") && !isCloudMode){
+                    po.put("UpdatedAt", value);
+                } else {
+                    po.put(fieldName, value);
+                }
             }
         }
     }
@@ -148,12 +163,18 @@ public class Util {
             Object value = null;
             if(fieldName.equals("objectId") && isCloudMode){
                 value = po.getObjectId();
+            } else if(fieldName.equals("objectId") && !isCloudMode) {
+                value = po.get("ObjectId");
             }
             if(fieldName.equals("createdAt") && isCloudMode){
                 value = po.getCreatedAt();
+            } else if(fieldName.equals("createdAt") && !isCloudMode){
+                value = po.get("CreatedAt");
             }
             if(fieldName.equals("updatedAt") && isCloudMode){
                 value = po.getUpdatedAt();
+            } else if(fieldName.equals("updatedAt") && !isCloudMode){
+                value = po.get("UpdatedAt");
             }
             if(value == null) {
                 value = po.get(fieldName);
@@ -264,7 +285,7 @@ public class Util {
      * @param isCreateMode
      * @param isCloudMode
      * @return
-     * @throws java.lang.reflect.InvocationTargetException
+     * @throws InvocationTargetException
      * @throws NoSuchMethodException
      * @throws InstantiationException
      * @throws IllegalAccessException
@@ -300,14 +321,17 @@ public class Util {
                     }
                 }
                 if(base != null && po == null){
-                    for(Base childBase : (List<Base>) field.get(base)){
-                        Map<Integer, List<ModelPONode>> childMap =
-                                getModelPoTreeRec(childClazz, deep + 1, childBase, null, isCreateMode, isCloudMode);
+                    List<Base> list = (List<Base>) field.get(base);
+                    if(list != null && !list.isEmpty()){
+                        for(Base childBase : list){
+                            Map<Integer, List<ModelPONode>> childMap =
+                                    getModelPoTreeRec(childClazz, deep + 1, childBase, null, isCreateMode, isCloudMode);
 
-                        if(childMap.containsKey(deep + 1)){
-                            node.nodes.addAll(childMap.get(deep + 1));
+                            if(childMap.containsKey(deep + 1)){
+                                node.nodes.addAll(childMap.get(deep + 1));
+                            }
+                            mergeMaps(map, childMap);
                         }
-                        mergeMaps(map, childMap);
                     }
                 }
             } else {
@@ -401,6 +425,8 @@ public class Util {
                         child.modelPO.po.save();
                     } else {
                         child.modelPO.po.pin();
+//                        Log.i("BASE OBJECT PIN", "CLASS: " + child.modelPO.po.getClassName() + " ID: " + child.modelPO.po.get("ObjectId"));
+//                        Log.i("BASE OBJECT PIN", " BASE: " + child.modelPO.base);
                     }
                 }
             }
@@ -410,6 +436,8 @@ public class Util {
             map.get(1).get(0).modelPO.po.save();
         } else {
             map.get(1).get(0).modelPO.po.pin();
+//            Log.i("BASE OBJECT PIN", "CLASS: " + map.get(1).get(0).modelPO.po.getClassName() + " ID: " + map.get(1).get(0).modelPO.po.get("ObjectId"));
+//            Log.i("BASE OBJECT PIN", " BASE: " + map.get(1).get(0).modelPO.base);
         }
     }
 
