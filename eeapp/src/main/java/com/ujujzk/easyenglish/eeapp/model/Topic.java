@@ -10,7 +10,6 @@ public class Topic extends Base {
     private List<Task> tasks;
     private String ruleId;
 
-
     public Topic() {
     }
 
@@ -31,7 +30,6 @@ public class Topic extends Base {
     public int getTasksNumber () {
         return tasks.size();
     }
-
 
     public String getTitle() {
         return title;

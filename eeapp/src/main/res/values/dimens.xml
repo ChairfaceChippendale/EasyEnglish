@@ -11,5 +11,6 @@
     <dimen name="task_act_tv_answer_text_size">20sp</dimen>
     <dimen name="task_act_tv_question_text_size">20sp</dimen>
     <dimen name="task_act_tv_rule_text_size">20sp</dimen>
-    <dimen name="adw_text_size">20sp</dimen>
+    <dimen name="adw_text_size">24sp</dimen>
+    <dimen name="adw_act_tv_title_text_size">36sp</dimen>
 </resources>

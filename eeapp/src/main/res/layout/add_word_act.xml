@@ -27,7 +27,17 @@
 
     </RelativeLayout>
 
-
+    <TextView
+            android:id="@+id/adw_act_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:layout_below="@id/adw_act_rl_top_menu"
+            android:gravity="center"
+            android:textSize="@dimen/adw_act_tv_title_text_size"
+            android:textColor="@color/adw_act_tv_title_text_color"
+            android:text="@string/adw_act_tv_title_text"
+            />
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,25 +49,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/adw_text_size"
-                android:text="Front"/>
+                android:textColor="@color/adw_act_tv_text_color"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="Pack name"/>
 
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/adw_text_size"/>
+                android:textSize="@dimen/adw_text_size"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/adw_text_size"
-                android:text="Back"/>
+                android:textColor="@color/adw_act_tv_text_color"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="Front side"/>
 
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/adw_text_size"/>
+                android:textSize="@dimen/adw_text_size"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/adw_text_size"
+                android:textColor="@color/adw_act_tv_text_color"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="Back side"/>
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/adw_text_size"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
 
     </LinearLayout>
+    <Button
+            android:id="@+id/adw_act_btn_add_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/adw_act_btn_add_card"/>
 
 
 

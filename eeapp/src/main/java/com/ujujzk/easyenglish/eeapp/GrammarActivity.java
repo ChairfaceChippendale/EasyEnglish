@@ -17,7 +17,6 @@ public class GrammarActivity extends Activity {
     Button start;
     ImageView goBack;
     ListView topicsList;
-    String [] topicsTitles = {"Articles a(an) and the", "Adjectives order"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +36,8 @@ public class GrammarActivity extends Activity {
                 return view;
             }
         };
+
+
         new AsyncTask<Void, Void, List<Topic>>(){
             @Override
             protected List<Topic> doInBackground(Void... params) {
@@ -48,6 +49,8 @@ public class GrammarActivity extends Activity {
                 topicsListAdapter.notifyDataSetChanged();
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+
 
 
         topicsList.setAdapter(topicsListAdapter);

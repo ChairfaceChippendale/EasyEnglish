@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import com.ujujzk.easyenglish.eeapp.model.Pack;
 
@@ -36,9 +37,16 @@ public class VocabularyActivity extends Activity {
 
 
 
-        ArrayAdapter<Pack> packsListAdapter = new ArrayAdapter<Pack>(this,
-                android.R.layout.simple_list_item_multiple_choice,
-                packs);
+        final ArrayAdapter<Pack> packsListAdapter = new ArrayAdapter<Pack>(this,
+                android.R.layout.simple_list_item_multiple_choice){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                Pack pack = getItem(position);
+                ((CheckedTextView) view).setText(pack.getTitle());
+                return view;
+            }
+        };
 
 
 
