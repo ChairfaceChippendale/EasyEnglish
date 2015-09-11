@@ -73,8 +73,12 @@
             android:id="@+id/vocab_act_btn_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:background="@drawable/btn_bg"
+            android:textColor="@drawable/btn_text_color"
+            android:textSize="@dimen/vocab_act_btn_text_size"
             android:text="@string/vocab_act_btn_start_text"/>
 
 </RelativeLayout>

@@ -26,4 +26,5 @@
     <string name="title_activity_word_slide">LearnWord</string>
     <string name="adw_act_tv_title_text">New card</string>
     <string name="adw_act_btn_add_card">Add</string>
+    <string name="rule_act_btn_start_text">start test</string>
 </resources>

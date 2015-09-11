@@ -104,13 +104,21 @@
                 android:id="@+id/task_act_btn_tip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
                 android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:textColor="@drawable/btn_text_color"
+                android:textSize="@dimen/task_act_btn_text_size"
                 android:text="@string/task_act_btn_tip_text"/>
         <Button
                 android:id="@+id/task_act_btn_check_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
                 android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:textColor="@drawable/btn_text_color"
+                android:textSize="@dimen/task_act_btn_text_size"
                 android:text="@string/task_act_btn_check_text"/>
 
     </LinearLayout>

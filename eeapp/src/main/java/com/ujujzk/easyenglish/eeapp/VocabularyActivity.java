@@ -50,9 +50,6 @@ public class VocabularyActivity extends Activity {
 
 
 
-
-
-
         packsList.setAdapter(packsListAdapter);
 
 
@@ -63,7 +60,7 @@ public class VocabularyActivity extends Activity {
             public void onClick(View v) {
 
                 //Check what packs were selected
-                SparseBooleanArray checkedPacksPositions = packsList.getCheckedItemPositions();
+                SparseBooleanArray checkedPacksPositions = packsList.getCheckedItemPositions();//USE getCheckedItemIds() INSTED OF getCheckedItemPositions()
                 for (int i = 0; i < checkedPacksPositions.size(); i++) {
                     int key = checkedPacksPositions.keyAt(i);
                     if (checkedPacksPositions.get(key)) {

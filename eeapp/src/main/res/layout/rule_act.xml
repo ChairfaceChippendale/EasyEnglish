@@ -44,7 +44,8 @@
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rule_act_tv_title">
+            android:layout_below="@+id/rule_act_tv_title"
+            android:layout_above="@+id/rule_act_btn_start">
 
         <TextView
                 android:id="@+id/rule_act_tv_rule"
@@ -55,5 +56,21 @@
                 android:text="@string/rule_act_tv_rule_text"/>
 
     </ScrollView>
+
+        <Button
+                android:id="@+id/rule_act_btn_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/rule_act_btn_padding"
+                android:paddingRight="@dimen/rule_act_btn_padding"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/btn_bg"
+                android:textColor="@drawable/btn_text_color"
+                android:textSize="@dimen/rule_act_btn_text_size"
+                android:text="@string/rule_act_btn_start_text"/>
+
+
 
 </RelativeLayout>

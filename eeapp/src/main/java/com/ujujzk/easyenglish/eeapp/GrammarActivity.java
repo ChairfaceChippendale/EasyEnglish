@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -16,6 +18,7 @@ public class GrammarActivity extends Activity {
 
     Button start;
     ImageView goBack;
+
     ListView topicsList;
 
     @Override
@@ -60,8 +63,8 @@ public class GrammarActivity extends Activity {
 
                 //DEFINE RULE ID
 
-                Intent intent = new Intent(GrammarActivity.this, RuleActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(GrammarActivity.this, RuleActivity.class);
+                //startActivity(intent);
             }
         });
 
@@ -70,10 +73,19 @@ public class GrammarActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                //CHECK WHAT TOPICS WERE SELECTED
+                SparseBooleanArray checkedPacksPositions = topicsList.getCheckedItemPositions();//USE getCheckedItemIds() INSTED OF getCheckedItemPositions()
+                for (int i = 0; i < checkedPacksPositions.size(); i++) {
+                    int key = checkedPacksPositions.keyAt(i);
+                    if (checkedPacksPositions.get(key)) {
 
-                Intent intent = new Intent(GrammarActivity.this, TaskActivity.class);
-                startActivity(intent);
+                        //COLLECT ALL SELECTED PACKS AND DO WITH THEM SOMETHING
+                        Log.d("My TAG", ((Topic)topicsList.getItemAtPosition(key)).getTitle());
+
+                    }
+                }
+
+                //Intent intent = new Intent(GrammarActivity.this, TaskActivity.class);
+                //startActivity(intent);
             }
         });
 

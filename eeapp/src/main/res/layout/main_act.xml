@@ -36,19 +36,15 @@
     </RelativeLayout>
 
 
-    <Button
-            android:id="@+id/main_act_btn_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/main_act_btn_grammar"
-            android:textSize="@dimen/main_act_btn_text_size"
-            android:text="@string/main_act_btn_sign_in_text"/>
 
     <Button
             android:id="@+id/main_act_btn_grammar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_above="@+id/main_act_btn_vocabulary"
+            android:background="@drawable/btn_bg"
+            android:textColor="@drawable/btn_text_color"
             android:textSize="@dimen/main_act_btn_text_size"
             android:text="@string/main_act_btn_grammar_text"/>
 
@@ -58,7 +54,10 @@
             android:id="@+id/main_act_btn_vocabulary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_above="@+id/main_act_tv_appversion"
+            android:background="@drawable/btn_bg"
+            android:textColor="@drawable/btn_text_color"
             android:textSize="@dimen/main_act_btn_text_size"
             android:text="@string/main_act_btn_vocabulary_text"/>
 

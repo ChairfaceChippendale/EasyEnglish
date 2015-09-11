@@ -2,7 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">8dp</dimen>
     <dimen name="activity_vertical_margin">8dp</dimen>
-    <dimen name="main_act_btn_text_size">20sp</dimen>
+    <dimen name="main_act_btn_text_size">25sp</dimen>
     <dimen name="vocab_act_tv_title_text_size">36sp</dimen>
     <dimen name="gram_act_tv_title_text_size">36sp</dimen>
     <dimen name="rule_act_tv_title_text_size">30sp</dimen>
@@ -13,4 +13,13 @@
     <dimen name="task_act_tv_rule_text_size">20sp</dimen>
     <dimen name="adw_text_size">24sp</dimen>
     <dimen name="adw_act_tv_title_text_size">36sp</dimen>
+    <dimen name="btn_radius">10dp</dimen>
+    <dimen name="btn_border_width">2dp</dimen>
+    <dimen name="gram_act_btn_text_size">20sp</dimen>
+    <dimen name="adw_act_btn_text_size">20sp</dimen>
+    <dimen name="garm_act_btn_padding">15dp</dimen>
+    <dimen name="rule_act_btn_text_size">20sp</dimen>
+    <dimen name="rule_act_btn_padding">10dp</dimen>
+    <dimen name="task_act_btn_text_size">20sp</dimen>
+    <dimen name="vocab_act_btn_text_size">20dp</dimen>
 </resources>

@@ -10,4 +10,11 @@
     <color name="wslide_act_tv_title_text_color">#000</color>
     <color name="adw_act_tv_text_color">#000</color>
     <color name="adw_act_tv_title_text_color">#000</color>
+
+    <color name="app_color_main">#FFEEEEEE</color>
+
+    <color name="app_color_black">#FF000000</color>
+    <color name="app_color_red">#ffe81824</color>
+    <color name="app_color_orange">#ffff9b2a</color>
+
 </resources>

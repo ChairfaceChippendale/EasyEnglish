@@ -92,8 +92,12 @@
             android:id="@+id/adw_act_btn_add_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:background="@drawable/btn_bg"
+            android:textColor="@drawable/btn_text_color"
+            android:textSize="@dimen/adw_act_btn_text_size"
             android:text="@string/adw_act_btn_add_card"/>
 
 
