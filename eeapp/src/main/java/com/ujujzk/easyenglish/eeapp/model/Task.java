@@ -41,5 +41,10 @@ public class Task extends Base {
         this.answer = answer;
     }
 
+    public String getRuleId() {
+        return ruleId;
+    }
+
+
 
 }

@@ -23,7 +23,7 @@ public class SqliteLocalCrudDao<Model extends Base> implements CrudDao<Model, St
     private String getCreateTableQuery(Model model){
 
         StringBuilder createTableQuery = new StringBuilder();
-        createTableQuery.append("create table if not exists ");
+        createTableQuery.append("CREATE TABLE IF NOT EXISTS ");
         createTableQuery.append(model.getClass().getSimpleName());
         createTableQuery.append(" ( ");
 
@@ -36,11 +36,11 @@ public class SqliteLocalCrudDao<Model extends Base> implements CrudDao<Model, St
             createTableQuery.append(" " + colName + " ");
 
             if(classType.equals(String.class)){
-                createTableQuery.append(" nvarchar(1000) ");
+                createTableQuery.append(" NVARCHAR(1000) ");
             } else if(classType.equals(Integer.class)){
-                createTableQuery.append(" integer ");
+                createTableQuery.append(" INTEGER ");
             } else if(classType.equals(Date.class)){
-                createTableQuery.append(" datetime ");
+                createTableQuery.append(" DATETIME ");
             } else {
                 throw new RuntimeException("unknown class type");
             }

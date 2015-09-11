@@ -3,6 +3,7 @@ package com.ujujzk.easyenglish.eeapp;
 import android.content.Context;
 import com.parse.Parse;
 import com.ujujzk.easyenglish.eeapp.dao.CrudDao;
+import com.ujujzk.easyenglish.eeapp.dao.KeyValue;
 import com.ujujzk.easyenglish.eeapp.dao.parse.ParseCloudCrudDaoImpl;
 import com.ujujzk.easyenglish.eeapp.dao.parse.ParseLocalCrudDaoImpl;
 import com.ujujzk.easyenglish.eeapp.dao.sqlite.SqliteLocalCrudDao;
@@ -44,8 +45,8 @@ public class Application extends android.app.Application {
 
         Parse.initialize(this, "a2FaVXXRxCiY0r61U0nZ6hS6VhuSDcQfC32Vhium", "b2aaFgro20MWP8t1sRGbjdsRrJrwBBm78cSDKxD8");
 
-//        cardLocalCrudDao = new ParseLocalCrudDaoImpl<Card>(Card.class);
-        cardLocalCrudDao = new SqliteLocalCrudDao<Card>();
+        cardLocalCrudDao = new ParseLocalCrudDaoImpl<Card>(Card.class);
+//        cardLocalCrudDao = new SqliteLocalCrudDao<Card>();
         cardCloudCrudDao = new ParseCloudCrudDaoImpl<Card>(Card.class);
 
         packLocalCrudDao = new ParseLocalCrudDaoImpl<Pack>(Pack.class);
@@ -70,13 +71,22 @@ public class Application extends android.app.Application {
 
         }
         //test();
+        //test2();
     }
 
+    private void test2(){
 
+//        Application.cardLocalCrudDao.create(new Card("Savosh", "Aleksandr"));
+
+        for(Card card : Application.cardLocalCrudDao.readBy(new KeyValue("front", "Savosh"))) {
+            System.out.println("card: " + card);
+        }
+
+    }
 
     private void test(){
 
-        Application.cardLocalCrudDao.create(new Card("Front", "Back"));
+
 
     }
 }

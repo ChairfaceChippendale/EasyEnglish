@@ -9,22 +9,28 @@ import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
+import com.ujujzk.easyenglish.eeapp.model.Task;
 import com.ujujzk.easyenglish.eeapp.model.Topic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class GrammarActivity extends Activity {
 
-    Button start;
+    Button start, readRule;
     ImageView goBack;
-
     ListView topicsList;
+    ArrayList<Task> aggregateTasksToLearn;
+    ArrayList<Topic> availableTopics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grammar_act);
+
+
 
         topicsList = (ListView) findViewById(R.id.gram_act_lv_topics_list);
         topicsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -48,6 +54,7 @@ public class GrammarActivity extends Activity {
             }
             @Override
             protected void onPostExecute(List<Topic> topics) {
+                //availableTopics = new ArrayList<Topic>(topics);
                 topicsListAdapter.addAll(topics);
                 topicsListAdapter.notifyDataSetChanged();
             }
@@ -57,35 +64,49 @@ public class GrammarActivity extends Activity {
 
 
         topicsList.setAdapter(topicsListAdapter);
-        topicsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //DEFINE RULE ID
-
-                //Intent intent = new Intent(GrammarActivity.this, RuleActivity.class);
-                //startActivity(intent);
-            }
-        });
 
         start = (Button) findViewById(R.id.gram_act_btn_start);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                aggregateTasksToLearn = new ArrayList<Task>();
+
                 SparseBooleanArray checkedPacksPositions = topicsList.getCheckedItemPositions();//USE getCheckedItemIds() INSTED OF getCheckedItemPositions()
                 for (int i = 0; i < checkedPacksPositions.size(); i++) {
                     int key = checkedPacksPositions.keyAt(i);
                     if (checkedPacksPositions.get(key)) {
 
+
                         //COLLECT ALL SELECTED PACKS AND DO WITH THEM SOMETHING
-                        Log.d("My TAG", ((Topic)topicsList.getItemAtPosition(key)).getTitle());
+                        Log.d("My TAG", ((Topic) topicsList.getItemAtPosition(key)).getTitle());
+
+
+                        aggregateTasksToLearn.addAll( Application.topicCloudCrudDao.readWithRelations( ((Topic) topicsList.getItemAtPosition(key)).getObjectId() ).getAllTasks() );
 
                     }
                 }
 
-                //Intent intent = new Intent(GrammarActivity.this, TaskActivity.class);
-                //startActivity(intent);
+                if (!aggregateTasksToLearn.isEmpty()) {
+
+                    Intent intent = new Intent(GrammarActivity.this, TaskActivity.class);
+                    intent.putExtra(Task.class.getCanonicalName(), aggregateTasksToLearn);
+//                    intent.putParcelableArrayListExtra(Task.class.getCanonicalName(), aggregateTasksToLearn);
+                    startActivity(intent);
+
+                }
+            }
+        });
+
+        readRule = (Button) findViewById(R.id.gram_act_btn_rule);
+        readRule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
             }
         });
 

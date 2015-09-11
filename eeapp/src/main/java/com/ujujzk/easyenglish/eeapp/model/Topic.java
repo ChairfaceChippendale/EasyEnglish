@@ -13,8 +13,11 @@ public class Topic extends Base {
     public Topic() {
     }
 
+
+
     public Topic(String title, List<Task> tasks, String ruleId) {
         this.title = title;
+
         this.tasks = new ArrayList<Task>(tasks);
         this.ruleId = ruleId;
     }
@@ -37,6 +40,10 @@ public class Topic extends Base {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Task> getAllTasks() {
+        return tasks;
     }
 
 

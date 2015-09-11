@@ -29,4 +29,11 @@ public class Card extends Base {
         this.back = back;
     }
 
+    @Override
+    public String toString() {
+        return "Card{" +
+                "front='" + front + '\'' +
+                ", back='" + back + '\'' +
+                "} " + super.toString();
+    }
 }
