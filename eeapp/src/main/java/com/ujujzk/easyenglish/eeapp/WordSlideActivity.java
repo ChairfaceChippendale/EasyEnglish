@@ -2,10 +2,12 @@ package com.ujujzk.easyenglish.eeapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.ujujzk.easyenglish.eeapp.model.Card;
+import com.ujujzk.easyenglish.eeapp.service.PronunciationService;
 
 import java.util.ArrayList;
 
@@ -28,12 +31,15 @@ public class WordSlideActivity extends Activity {
 
     private static final int STEPS_BACK = 4;
 
+    private ArrayList<Card> aggregateCardsToLearn;
+
     private ImageView goBack;
     private ImageView prononciation;
     private int currentCard;
 
     private boolean side;
-    private ArrayList<Card> pack;
+
+    private String wordToPronounce;
 
 
 
@@ -41,6 +47,8 @@ public class WordSlideActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_slide_act);
+
+        aggregateCardsToLearn = (ArrayList<Card>) getIntent().getSerializableExtra(Card.class.getCanonicalName());
 
         currentCard = 0;
         side = FRONT_SIDE;
@@ -62,12 +70,22 @@ public class WordSlideActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                //WORD PRONONSIATION
-                //http://api.forvo.com/documentation/word-pronunciations/
+                //word pronunciation
+                //powered by Google
+                //https://ssl.gstatic.com/dictionary/static/sounds/de/0/WORD.mp3
+                wordToPronounce = aggregateCardsToLearn.get(currentCard).getBack();
+
+                if(side == BACK_SIDE && !wordToPronounce.isEmpty()){
+
+                    wordToPronounce.replace(" ", "_").toLowerCase();
+                    Intent intent = new Intent(PronunciationService.PRONUNCIATION_TASK);
+                    intent.putExtra(PronunciationService.WORD, wordToPronounce);
+                    sendBroadcast(intent);
+
+                }
 
             }
         });
-
 
     }
 
@@ -81,7 +99,7 @@ public class WordSlideActivity extends Activity {
         private Rect mTextBoundRect = new Rect();
 
         private float width, height, centerX, centerY;
-        private String text = "Word";
+        private String text = "word";
 
         private int selfMoveDirection = 0;
 
@@ -111,15 +129,15 @@ public class WordSlideActivity extends Activity {
             }
 
             //make a background
-            mPaint.setColor(Color.WHITE);
-            canvas.drawPaint(mPaint);
+            //mPaint.setColor(getResources().getColor(R.color.app_color_main));
+            //canvas.drawPaint(mPaint);
 
             //make the text
             float mTextWidth, mTextHeight;
-            mPaint.setColor(Color.BLUE);
+            mPaint.setColor(getResources().getColor(R.color.app_color_black));
             mPaint.setStyle(Paint.Style.FILL);
             mPaint.setAntiAlias(true);
-            mPaint.setTextSize(100);
+            mPaint.setTextSize(50);
             //sizes of rectangle that is made by the text
             mPaint.getTextBounds(text, 0, text.length(), mTextBoundRect);
             mTextWidth = mPaint.measureText(text);
@@ -227,20 +245,25 @@ public class WordSlideActivity extends Activity {
 
         private void nextWordSlideLearnView (boolean isLearned) {
 
+            //опнбепхрэ х рейсыхи хмдейя х оепемня якнбю
+
             if (!isLearned) {
-                pack.add(currentCard+STEPS_BACK, pack.get(currentCard));
+                aggregateCardsToLearn.add(aggregateCardsToLearn.size(), aggregateCardsToLearn.get(currentCard));
             }
             currentCard++;
-            text = pack.get(currentCard).getFront();
+            text = aggregateCardsToLearn.get(currentCard).getFront();
+
+            //!!------------------------------------------------------
+
         }
 
         private void translateWordSlideLearnView () {
 
             if (side == FRONT_SIDE) {
-                text = pack.get(currentCard).getBack();
+                text = aggregateCardsToLearn.get(currentCard).getBack();
                 side = BACK_SIDE;
             } else {
-                text = pack.get(currentCard).getFront();
+                text = aggregateCardsToLearn.get(currentCard).getFront();
                 side = FRONT_SIDE;
             }
 

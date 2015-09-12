@@ -22,20 +22,19 @@ public class GrammarActivity extends Activity {
     Button start, readRule;
     ImageView goBack;
     ListView topicsList;
-    ProgressBar progressBar;
+    private ProgressBar progressBar;
     ArrayList<Task> aggregateTasksToLearn;
-    ArrayList<Topic> availableTopics;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grammar_act);
 
-        topicsList = (ListView) findViewById(R.id.gram_act_lv_topics_list);
-        topicsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
         progressBar = (ProgressBar) findViewById(R.id.gram_act_prorgress_bar);
 
+        topicsList = (ListView) findViewById(R.id.gram_act_lv_topics_list);
+        topicsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         final ArrayAdapter<Topic> topicsListAdapter = new ArrayAdapter<Topic>(this,
                 android.R.layout.simple_list_item_multiple_choice){
             @Override
@@ -78,7 +77,13 @@ public class GrammarActivity extends Activity {
                 for (int i = 0; i < checkedPacksPositions.size(); i++) {
                     int key = checkedPacksPositions.keyAt(i);
                     if (checkedPacksPositions.get(key)) {
-                        aggregateTasksToLearn.addAll( Application.topicCloudCrudDao.readWithRelations( ((Topic) topicsList.getItemAtPosition(key)).getObjectId() ).getAllTasks() );
+
+                        aggregateTasksToLearn.addAll(
+                                Application.topicCloudCrudDao.readWithRelations(
+                                    ( (Topic)topicsList.getItemAtPosition(key) ).getObjectId()
+                                ).getAllTasks()
+                        );
+
                     }
                 }
 

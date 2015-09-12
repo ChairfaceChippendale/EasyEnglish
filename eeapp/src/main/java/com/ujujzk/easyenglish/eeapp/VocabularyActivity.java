@@ -2,15 +2,18 @@ package com.ujujzk.easyenglish.eeapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.ujujzk.easyenglish.eeapp.model.Card;
 import com.ujujzk.easyenglish.eeapp.model.Pack;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class VocabularyActivity extends Activity {
@@ -18,24 +21,25 @@ public class VocabularyActivity extends Activity {
     Button start;
     ImageView goBack;
     ListView packsList;
-    ArrayList<Pack> packs;
-    //String [] packsTitles = {"U2","U3","U4","Cats","U6A","Cats tails"};
+
+    private ProgressBar progressBar;
+
+    private ArrayList<Card> aggregateCardsToLearn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vocabulary_act);
-
+/*
         packs = new ArrayList<Pack>();
         packs.add(MockService.getPack());
         packs.add(MockService.getPack());
-
-
+*/
+        progressBar = (ProgressBar) findViewById(R.id.vocab_act_prorgress_bar);
 
         packsList = (ListView) findViewById(R.id.vocab_act_lv_packs_list);
         packsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-
 
         final ArrayAdapter<Pack> packsListAdapter = new ArrayAdapter<Pack>(this,
                 android.R.layout.simple_list_item_multiple_choice){
@@ -48,10 +52,24 @@ public class VocabularyActivity extends Activity {
             }
         };
 
+        new AsyncTask<Void, Void, List<Pack>>(){
+            @Override
+            protected List<Pack> doInBackground(Void... params) {
+                return Application.packLocalCrudDao.readAll();
+            }
+            @Override
+            protected void onPostExecute(List<Pack> topics) {
 
+                packsListAdapter.addAll(topics);
+                packsListAdapter.notifyDataSetChanged();
+
+                progressBar.setVisibility(View.GONE);
+                packsList.setVisibility(View.VISIBLE);
+
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         packsList.setAdapter(packsListAdapter);
-
 
 
         start = (Button) findViewById(R.id.vocab_act_btn_start);
@@ -59,20 +77,29 @@ public class VocabularyActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                aggregateCardsToLearn = new ArrayList<Card>();
+
                 //Check what packs were selected
-                SparseBooleanArray checkedPacksPositions = packsList.getCheckedItemPositions();//USE getCheckedItemIds() INSTED OF getCheckedItemPositions()
+                SparseBooleanArray checkedPacksPositions = packsList.getCheckedItemPositions();
                 for (int i = 0; i < checkedPacksPositions.size(); i++) {
                     int key = checkedPacksPositions.keyAt(i);
                     if (checkedPacksPositions.get(key)) {
 
                         //COLLECT ALL SELECTED PACKS AND DO WITH THEM SOMETHING
-                        Log.d("My TAG", packs.get(key).getTitle());
+                        aggregateCardsToLearn.addAll(
+                                Application.packLocalCrudDao.readWithRelations(
+                                        ((Pack) packsList.getItemAtPosition(key)).getObjectId()
+                                ).getAllCards()
+                        );
 
                     }
                 }
 
-                Intent intent = new Intent(VocabularyActivity.this, WordSlideActivity.class);
-                startActivity(intent);
+                if (!aggregateCardsToLearn.isEmpty()) {
+                    Intent intent = new Intent(VocabularyActivity.this, WordSlideActivity.class);
+                    intent.putExtra(Card.class.getCanonicalName(), aggregateCardsToLearn);
+                    startActivity(intent);
+                }
             }
         });
 

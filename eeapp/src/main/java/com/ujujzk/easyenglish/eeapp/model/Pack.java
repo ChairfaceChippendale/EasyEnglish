@@ -30,7 +30,7 @@ public class Pack extends Base {
         return cards.size();
     }
 
-    public List<Card> getCards() {
+    public List<Card> getAllCards() {
         return cards;
     }
     public void addCards(ArrayList<Card> cards) {

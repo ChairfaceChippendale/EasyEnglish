@@ -7,7 +7,8 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:background="@color/app_color_main">
 
     <RelativeLayout
             android:id="@+id/vocab_act_rl_top_menu"
@@ -49,14 +50,31 @@
             android:text="@string/vocab_act_tv_title_text"
             />
 
-    <ListView
-            android:id="@+id/vocab_act_lv_packs_list"
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/vocab_act_tv_title"
             android:layout_above="@+id/vocab_act_btn_start">
 
-    </ListView>
+        <ProgressBar
+                android:id="@+id/vocab_act_prorgress_bar"
+                style="@android:style/Widget.Holo.Light.ProgressBar.Large.Inverse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="visible"/>
+
+        <ListView
+                android:id="@+id/vocab_act_lv_packs_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+        </ListView>
+
+    </RelativeLayout>
+
+
 
 
     <Button
