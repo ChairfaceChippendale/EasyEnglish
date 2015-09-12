@@ -75,18 +75,20 @@ public class TaskActivity extends Activity {
                 if (taskPassed) {
 
                     currentTaskNumber++;
-                    if (currentTaskNumber >= totalTasksNumber){
+                    if (currentTaskNumber >= totalTasksNumber) {
                         finish();
                     } else {
+
                         taskType.setText(aggregateTasksToLearn.get(currentTaskNumber).getTaskType());
                         question.setText(aggregateTasksToLearn.get(currentTaskNumber).getQuestion());
                         answer.setText(aggregateTasksToLearn.get(currentTaskNumber).getAnswer());
                         rule.setText(aggregateTasksToLearn.get(currentTaskNumber).getRuleId());
+
+                        answer.setVisibility(View.INVISIBLE);
+                        rule.setVisibility(View.INVISIBLE);
+                        checkNext.setText(getResources().getString(R.string.task_act_btn_check_text));
+                        taskPassed = false;
                     }
-                    answer.setVisibility(View.INVISIBLE);
-                    rule.setVisibility(View.INVISIBLE);
-                    checkNext.setText(getResources().getString(R.string.task_act_btn_check_text));
-                    taskPassed = false;
 
                 } else {
                     answer.setVisibility(View.VISIBLE);

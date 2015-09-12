@@ -22,6 +22,7 @@ public class GrammarActivity extends Activity {
     Button start, readRule;
     ImageView goBack;
     ListView topicsList;
+    ProgressBar progressBar;
     ArrayList<Task> aggregateTasksToLearn;
     ArrayList<Topic> availableTopics;
 
@@ -30,10 +31,10 @@ public class GrammarActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grammar_act);
 
-
-
         topicsList = (ListView) findViewById(R.id.gram_act_lv_topics_list);
         topicsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        progressBar = (ProgressBar) findViewById(R.id.gram_act_prorgress_bar);
 
         final ArrayAdapter<Topic> topicsListAdapter = new ArrayAdapter<Topic>(this,
                 android.R.layout.simple_list_item_multiple_choice){
@@ -46,7 +47,6 @@ public class GrammarActivity extends Activity {
             }
         };
 
-
         new AsyncTask<Void, Void, List<Topic>>(){
             @Override
             protected List<Topic> doInBackground(Void... params) {
@@ -54,14 +54,15 @@ public class GrammarActivity extends Activity {
             }
             @Override
             protected void onPostExecute(List<Topic> topics) {
-                //availableTopics = new ArrayList<Topic>(topics);
+
                 topicsListAdapter.addAll(topics);
                 topicsListAdapter.notifyDataSetChanged();
+
+                progressBar.setVisibility(View.GONE);
+                topicsList.setVisibility(View.VISIBLE);
+
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-
-
 
         topicsList.setAdapter(topicsListAdapter);
 
@@ -73,28 +74,18 @@ public class GrammarActivity extends Activity {
 
                 aggregateTasksToLearn = new ArrayList<Task>();
 
-                SparseBooleanArray checkedPacksPositions = topicsList.getCheckedItemPositions();//USE getCheckedItemIds() INSTED OF getCheckedItemPositions()
+                SparseBooleanArray checkedPacksPositions = topicsList.getCheckedItemPositions();
                 for (int i = 0; i < checkedPacksPositions.size(); i++) {
                     int key = checkedPacksPositions.keyAt(i);
                     if (checkedPacksPositions.get(key)) {
-
-
-                        //COLLECT ALL SELECTED PACKS AND DO WITH THEM SOMETHING
-                        Log.d("My TAG", ((Topic) topicsList.getItemAtPosition(key)).getTitle());
-
-
                         aggregateTasksToLearn.addAll( Application.topicCloudCrudDao.readWithRelations( ((Topic) topicsList.getItemAtPosition(key)).getObjectId() ).getAllTasks() );
-
                     }
                 }
 
                 if (!aggregateTasksToLearn.isEmpty()) {
-
                     Intent intent = new Intent(GrammarActivity.this, TaskActivity.class);
                     intent.putExtra(Task.class.getCanonicalName(), aggregateTasksToLearn);
-//                    intent.putParcelableArrayListExtra(Task.class.getCanonicalName(), aggregateTasksToLearn);
                     startActivity(intent);
-
                 }
             }
         });
