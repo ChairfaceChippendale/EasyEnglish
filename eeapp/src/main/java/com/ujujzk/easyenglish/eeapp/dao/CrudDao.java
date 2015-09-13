@@ -16,7 +16,7 @@ public interface CrudDao<Model extends Base, PK> {
 
     public Model createWithRelations(Model model);
     public Model readWithRelations(PK pk);
-    public Model updateWithRelations(Model model);
+    public Model updateWithRelations(Model model);//возожен баг
     public boolean deleteWithRelations(PK pk);
 
     public Model createThrowException(Model model) throws CannotCreateException, OtherException;

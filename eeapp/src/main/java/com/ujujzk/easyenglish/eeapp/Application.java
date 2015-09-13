@@ -2,16 +2,19 @@ package com.ujujzk.easyenglish.eeapp;
 
 import android.content.Context;
 import com.parse.Parse;
+import com.parse.ParseCrashReporting;
 import com.ujujzk.easyenglish.eeapp.dao.CrudDao;
 import com.ujujzk.easyenglish.eeapp.dao.KeyValue;
 import com.ujujzk.easyenglish.eeapp.dao.parse.ParseCloudCrudDaoImpl;
 import com.ujujzk.easyenglish.eeapp.dao.parse.ParseLocalCrudDaoImpl;
-import com.ujujzk.easyenglish.eeapp.dao.sqlite.SqliteLocalCrudDao;
+
 import com.ujujzk.easyenglish.eeapp.model.*;
 
 import java.util.Arrays;
 
 public class Application extends android.app.Application {
+
+
 
     private static Context context;
 
@@ -42,7 +45,7 @@ public class Application extends android.app.Application {
 
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
-
+        ParseCrashReporting.enable(this);
         Parse.initialize(this, "a2FaVXXRxCiY0r61U0nZ6hS6VhuSDcQfC32Vhium", "b2aaFgro20MWP8t1sRGbjdsRrJrwBBm78cSDKxD8");
 
         cardLocalCrudDao = new ParseLocalCrudDaoImpl<Card>(Card.class);
@@ -70,6 +73,8 @@ public class Application extends android.app.Application {
             ruleCloudCrudDao.createWithRelations(new Rule("<body>...."));
 
         }
+
+//        throw new RuntimeException("test");
         //test();
         //test2();
     }

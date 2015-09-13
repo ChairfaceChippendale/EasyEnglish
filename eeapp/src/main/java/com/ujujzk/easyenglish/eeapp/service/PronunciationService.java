@@ -102,6 +102,7 @@ public class PronunciationService extends Service implements MediaPlayer.OnPrepa
             mediaPlayer.prepareAsync();
 
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,7 +112,7 @@ public class PronunciationService extends Service implements MediaPlayer.OnPrepa
 
     @Override
     public IBinder onBind(Intent intent) {
-        //return null;
-        throw new UnsupportedOperationException("Not yet implemented");
+        return null;
+
     }
 }

@@ -29,16 +29,13 @@ public class WordSlideActivity extends Activity {
     private static final boolean FRONT_SIDE = true;
     private static final boolean BACK_SIDE = false;
 
-    private static final int STEPS_BACK = 4;
-
     private ArrayList<Card> aggregateCardsToLearn;
 
     private ImageView goBack;
     private ImageView prononciation;
+
     private int currentCard;
-
     private boolean side;
-
     private String wordToPronounce;
 
 
@@ -78,6 +75,7 @@ public class WordSlideActivity extends Activity {
                 if(side == BACK_SIDE && !wordToPronounce.isEmpty()){
 
                     wordToPronounce.replace(" ", "_").toLowerCase();
+                    Log.d("My Log", wordToPronounce);
                     Intent intent = new Intent(PronunciationService.PRONUNCIATION_TASK);
                     intent.putExtra(PronunciationService.WORD, wordToPronounce);
                     sendBroadcast(intent);
@@ -87,6 +85,19 @@ public class WordSlideActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        startService(new Intent(this,PronunciationService.class));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopService(new Intent(this,PronunciationService.class));
     }
 
     class WordSlideLearnView extends View {
@@ -99,7 +110,7 @@ public class WordSlideActivity extends Activity {
         private Rect mTextBoundRect = new Rect();
 
         private float width, height, centerX, centerY;
-        private String text = "word";
+        private String text = aggregateCardsToLearn.get(currentCard).getFront();
 
         private int selfMoveDirection = 0;
 
@@ -245,16 +256,15 @@ public class WordSlideActivity extends Activity {
 
         private void nextWordSlideLearnView (boolean isLearned) {
 
-            //опнбепхрэ х рейсыхи хмдейя х оепемня якнбю
-
             if (!isLearned) {
-                aggregateCardsToLearn.add(aggregateCardsToLearn.size(), aggregateCardsToLearn.get(currentCard));
+                aggregateCardsToLearn.add(aggregateCardsToLearn.get(currentCard));
             }
             currentCard++;
-            text = aggregateCardsToLearn.get(currentCard).getFront();
-
-            //!!------------------------------------------------------
-
+            if  (currentCard < aggregateCardsToLearn.size()) {
+                text = aggregateCardsToLearn.get(currentCard).getFront();
+            }else{
+                finish();
+            }
         }
 
         private void translateWordSlideLearnView () {

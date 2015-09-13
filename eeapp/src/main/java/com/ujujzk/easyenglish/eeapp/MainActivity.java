@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import com.parse.ParseObject;
 
 
 public class MainActivity extends Activity {
@@ -20,6 +21,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_act);
+
+
+
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
+
+
 
         grammar = (Button) findViewById(R.id.main_act_btn_grammar);
         grammar.setOnClickListener(new View.OnClickListener() {

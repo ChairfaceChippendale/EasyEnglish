@@ -20,7 +20,10 @@ public class VocabularyActivity extends Activity {
 
     Button start;
     ImageView goBack;
+    ImageView addPack;
     ListView packsList;
+
+
 
     private ProgressBar progressBar;
 
@@ -36,6 +39,7 @@ public class VocabularyActivity extends Activity {
         packs.add(MockService.getPack());
         packs.add(MockService.getPack());
 */
+
         progressBar = (ProgressBar) findViewById(R.id.vocab_act_prorgress_bar);
 
         packsList = (ListView) findViewById(R.id.vocab_act_lv_packs_list);
@@ -71,6 +75,14 @@ public class VocabularyActivity extends Activity {
 
         packsList.setAdapter(packsListAdapter);
 
+        addPack = (ImageView) findViewById(R.id.vocab_act_img_add);
+        addPack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(VocabularyActivity.this, AddWordActivity.class);
+                startActivity(intent);
+            }
+        });
 
         start = (Button) findViewById(R.id.vocab_act_btn_start);
         start.setOnClickListener(new View.OnClickListener() {

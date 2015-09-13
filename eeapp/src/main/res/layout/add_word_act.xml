@@ -55,6 +55,7 @@
                 android:text="Pack name"/>
 
         <EditText
+                android:id="@+id/adw_act_et_pack_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/adw_text_size"
@@ -69,6 +70,7 @@
                 android:text="Front side"/>
 
         <EditText
+                android:id="@+id/adw_act_et_front_side"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/adw_text_size"
@@ -83,6 +85,7 @@
                 android:text="Back side"/>
 
         <EditText
+                android:id="@+id/adw_act_et_back_side"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/adw_text_size"
