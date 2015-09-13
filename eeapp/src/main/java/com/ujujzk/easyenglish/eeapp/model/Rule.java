@@ -10,4 +10,8 @@ public class Rule extends Base {
     public Rule(String rule) {
         this.rule = rule;
     }
+
+    public String getRule() {
+        return rule;
+    }
 }

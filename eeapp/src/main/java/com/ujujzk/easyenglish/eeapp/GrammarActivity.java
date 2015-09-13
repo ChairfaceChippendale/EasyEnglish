@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import com.ujujzk.easyenglish.eeapp.model.Rule;
 import com.ujujzk.easyenglish.eeapp.model.Task;
 import com.ujujzk.easyenglish.eeapp.model.Topic;
 
@@ -24,6 +25,8 @@ public class GrammarActivity extends Activity {
     ListView topicsList;
     private ProgressBar progressBar;
     ArrayList<Task> aggregateTasksToLearn;
+    Rule rule;
+    String topicId;
 
 
     @Override
@@ -65,7 +68,6 @@ public class GrammarActivity extends Activity {
 
         topicsList.setAdapter(topicsListAdapter);
 
-
         start = (Button) findViewById(R.id.gram_act_btn_start);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,10 +82,9 @@ public class GrammarActivity extends Activity {
 
                         aggregateTasksToLearn.addAll(
                                 Application.topicCloudCrudDao.readWithRelations(
-                                    ( (Topic)topicsList.getItemAtPosition(key) ).getObjectId()
+                                        ( (Topic)topicsList.getItemAtPosition(key) ).getObjectId()
                                 ).getAllTasks()
                         );
-
                     }
                 }
 
@@ -100,9 +101,34 @@ public class GrammarActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                SparseBooleanArray checkedPacksPositions = topicsList.getCheckedItemPositions();
+                for (int i = 0; i < checkedPacksPositions.size(); i++) {
+                    int key = checkedPacksPositions.keyAt(i);
+                    if (checkedPacksPositions.get(key)) {
 
+                        Log.d("GarmmActTag", "ruleId: " + ((Topic) topicsList.getItemAtPosition(key) ).getRuleId());
+                        rule = Application.ruleCloudCrudDao.read(
+                                ( (Topic) topicsList.getItemAtPosition(key) ).getRuleId()
+                        );
 
+                        topicId = ( (Topic)topicsList.getItemAtPosition(key) ).getObjectId();
 
+                        //TODO rule остаеться NULL
+
+                        Log.d("GarmmActTag", "rule: " + rule.getRule());
+                        Log.d("GarmmActTag", "topicId: " + topicId);
+
+                        break;
+
+                    }
+                }
+
+                if (rule != null){
+                    Intent intent = new Intent(GrammarActivity.this, RuleActivity.class);
+                    intent.putExtra(Rule.class.getCanonicalName(), rule);
+                    intent.putExtra(Topic.class.getCanonicalName(), topicId);
+                    startActivity(intent);
+                }
             }
         });
 

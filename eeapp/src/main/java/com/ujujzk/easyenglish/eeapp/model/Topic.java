@@ -46,6 +46,10 @@ public class Topic extends Base {
         return tasks;
     }
 
+    public String getRuleId (){
+        return ruleId;
+    }
+
 
 
 }
