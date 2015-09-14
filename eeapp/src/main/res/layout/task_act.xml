@@ -17,7 +17,6 @@
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:layout_alignParentTop="true">
 
-
         <ImageView
                 android:id="@+id/task_act_img_go_back"
                 android:layout_width="wrap_content"
@@ -29,7 +28,6 @@
 
     </RelativeLayout>
 
-
     <TextView
             android:id="@+id/task_act_tv_task_type"
             android:layout_width="match_parent"
@@ -37,7 +35,7 @@
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:layout_below="@+id/task_act_rl_top_menu"
             android:textSize="@dimen/task_act_tv_task_type_text_size"
-            android:textColor="@color/task_act_tv_task_type_text_size"
+            android:textColor="@color/app_color_black"
             android:text="@string/task_act_tv_task_type_text"/>
 
 
@@ -57,7 +55,7 @@
                 android:gravity="center"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:textSize="@dimen/task_act_tv_question_text_size"
-                android:textColor="@color/task_act_tv_question_text_color"
+                android:textColor="@color/app_color_black"
                 android:text="question"/>
 
         <TextView
@@ -69,10 +67,10 @@
                 android:gravity="center"
                 android:visibility="invisible"
                 android:textSize="@dimen/task_act_tv_answer_text_size"
-                android:textColor="@color/task_act_tv_answer_text_color"
+                android:textColor="@color/app_color_black"
                 android:text="answer"/>
 
-            <TextView
+            <WebView
                     android:id="@+id/task_act_tv_rule"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -81,7 +79,7 @@
                     android:gravity="center"
                     android:visibility="invisible"
                     android:textSize="@dimen/task_act_tv_rule_text_size"
-                    android:textColor="@color/task_act_tv_rule_text_color"
+                    android:textColor="@color/app_color_black"
                     android:text="rule"/>
 
     </LinearLayout>
@@ -103,6 +101,7 @@
                 android:textColor="@drawable/btn_text_color"
                 android:textSize="@dimen/task_act_btn_text_size"
                 android:text="@string/task_act_btn_tip_text"/>
+
         <Button
                 android:id="@+id/task_act_btn_check_next"
                 android:layout_width="match_parent"
@@ -115,10 +114,5 @@
                 android:text="@string/task_act_btn_check_text"/>
 
     </LinearLayout>
-
-
-
-
-
 
 </RelativeLayout>

@@ -20,13 +20,20 @@ import java.util.List;
 
 public class GrammarActivity extends Activity {
 
+    public static final String RULE = "ruleForRuleActivity";
+    public static final String TOPIC_ID = "topicIdForRuleActivity";
+    public static final String TOPIC_TITLE = "topicTitleForRuleActivity";
+
     Button start, readRule;
     ImageView goBack;
     ListView topicsList;
     private ProgressBar progressBar;
+
     ArrayList<Task> aggregateTasksToLearn;
+
     Rule rule;
     String topicId;
+    String topicTitle;
 
 
     @Override
@@ -82,7 +89,7 @@ public class GrammarActivity extends Activity {
 
                         aggregateTasksToLearn.addAll(
                                 Application.topicCloudCrudDao.readWithRelations(
-                                        ( (Topic)topicsList.getItemAtPosition(key) ).getObjectId()
+                                        ((Topic) topicsList.getItemAtPosition(key)).getObjectId()
                                 ).getAllTasks()
                         );
                     }
@@ -106,27 +113,28 @@ public class GrammarActivity extends Activity {
                     int key = checkedPacksPositions.keyAt(i);
                     if (checkedPacksPositions.get(key)) {
 
-                        Log.d("GarmmActTag", "ruleId: " + ((Topic) topicsList.getItemAtPosition(key) ).getRuleId());
-                        rule = Application.ruleCloudCrudDao.read(
-                                ( (Topic) topicsList.getItemAtPosition(key) ).getRuleId()
-                        );
+                        try {
+                            rule = Application.ruleCloudCrudDao.readThrowException(
+                                    ((Topic) topicsList.getItemAtPosition(key)).getRuleId()
+                            );
+                        } catch (Exception e){
+                            Log.d(getClass().getName(), e == null ? "dao error" : e.getMessage(), e);
+                        }
 
                         topicId = ( (Topic)topicsList.getItemAtPosition(key) ).getObjectId();
+                        topicTitle = ((Topic) topicsList.getItemAtPosition(key)).getTitle();
 
-                        //TODO rule остаеться NULL
-
-                        Log.d("GarmmActTag", "rule: " + rule.getRule());
+                        //Log.d("GarmmActTag", "rule: " + rule.getRule());
                         Log.d("GarmmActTag", "topicId: " + topicId);
-
                         break;
-
                     }
                 }
 
                 if (rule != null){
                     Intent intent = new Intent(GrammarActivity.this, RuleActivity.class);
-                    intent.putExtra(Rule.class.getCanonicalName(), rule);
-                    intent.putExtra(Topic.class.getCanonicalName(), topicId);
+                    intent.putExtra(TOPIC_TITLE, topicTitle);
+                    intent.putExtra(RULE, rule);
+                    intent.putExtra(TOPIC_ID, topicId);
                     startActivity(intent);
                 }
             }

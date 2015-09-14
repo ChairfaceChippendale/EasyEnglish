@@ -37,8 +37,6 @@
 
     </RelativeLayout>
 
-
-
     <FrameLayout
             android:id="@+id/wslide_act_fl_parent_layout_for_word_learn"
             android:layout_width="match_parent"
@@ -47,8 +45,5 @@
             android:background="@drawable/word_slide_bgr">
 
     </FrameLayout>
-
-
-
 
 </RelativeLayout>

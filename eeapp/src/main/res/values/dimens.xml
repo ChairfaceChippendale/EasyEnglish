@@ -6,7 +6,7 @@
     <dimen name="vocab_act_tv_title_text_size">36sp</dimen>
     <dimen name="gram_act_tv_title_text_size">36sp</dimen>
     <dimen name="rule_act_tv_title_text_size">30sp</dimen>
-    <dimen name="rule_act_tv_rule_text_size">12sp</dimen>
+    <dimen name="rule_act_wv_rule_text_size">12sp</dimen>
     <dimen name="task_act_tv_task_type_text_size">24sp</dimen>
     <dimen name="task_act_tv_answer_text_size">20sp</dimen>
     <dimen name="task_act_tv_question_text_size">20sp</dimen>

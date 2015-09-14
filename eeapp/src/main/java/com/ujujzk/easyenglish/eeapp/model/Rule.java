@@ -1,11 +1,16 @@
 package com.ujujzk.easyenglish.eeapp.model;
 
 /**
- * Created by Юлия on 08.09.2015.
+ * Created by пїЅпїЅпїЅпїЅ on 08.09.2015.
  */
 public class Rule extends Base {
 
     private String rule;
+
+
+    public Rule(){
+
+    }
 
     public Rule(String rule) {
         this.rule = rule;

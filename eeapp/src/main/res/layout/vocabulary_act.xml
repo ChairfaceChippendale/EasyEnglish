@@ -25,8 +25,6 @@
                 android:clickable="true"
                 android:src="@drawable/ic_add_circle_outline_black_36dp"/>
 
-
-
         <ImageView
                 android:id="@+id/vocab_act_img_go_back"
                 android:layout_width="wrap_content"
@@ -46,7 +44,7 @@
             android:layout_below="@+id/vocab_act_rl_top_menu"
             android:gravity="center"
             android:textSize="@dimen/vocab_act_tv_title_text_size"
-            android:textColor="@color/vocab_act_tv_title_text_color"
+            android:textColor="@color/app_color_black"
             android:text="@string/vocab_act_tv_title_text"
             />
 
@@ -73,9 +71,6 @@
         </ListView>
 
     </RelativeLayout>
-
-
-
 
     <Button
             android:id="@+id/vocab_act_btn_start"

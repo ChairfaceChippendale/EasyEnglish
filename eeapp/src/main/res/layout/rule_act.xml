@@ -18,7 +18,6 @@
             android:layout_alignParentTop="true"
             >
 
-
         <ImageView
                 android:id="@+id/rule_act_img_go_back"
                 android:layout_width="wrap_content"
@@ -38,7 +37,7 @@
             android:layout_below="@+id/rule_act_rl_top_menu"
             android:gravity="center"
             android:textSize="@dimen/rule_act_tv_title_text_size"
-            android:textColor="@color/rule_act_tv_title_text_color"
+            android:textColor="@color/app_color_black"
             android:text="@string/rule_act_tv_title_text"
             />
 
@@ -48,13 +47,14 @@
             android:layout_below="@+id/rule_act_tv_title"
             android:layout_above="@+id/rule_act_btn_start">
 
-        <TextView
-                android:id="@+id/rule_act_tv_rule"
+        <WebView
+                android:id="@+id/rule_act_wv_rule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/rule_act_tv_rule_text_size"
-                android:textColor="@color/rule_act_tv_title_text_color"
-                android:text="@string/rule_act_tv_rule_text"/>
+                android:background="@color/app_color_main"
+                android:textSize="@dimen/rule_act_wv_rule_text_size"
+                android:textColor="@color/app_color_black"
+                android:text="@string/rule_act_wv_rule_text"/>
 
     </ScrollView>
 
@@ -71,7 +71,5 @@
                 android:textColor="@drawable/btn_text_color"
                 android:textSize="@dimen/rule_act_btn_text_size"
                 android:text="@string/rule_act_btn_start_text"/>
-
-
 
 </RelativeLayout>

@@ -1,11 +1,10 @@
 package com.ujujzk.easyenglish.eeapp;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,10 +19,13 @@ public class TaskActivity extends Activity {
     Button tip, checkNext;
     ImageView goBack;
     EditText question;
-    TextView answer, rule, taskType;
+    TextView answer,  taskType;
+    WebView rule;
+
     boolean taskPassed = false;
     int currentTaskNumber;
     int totalTasksNumber;
+
 
     ArrayList<Task> aggregateTasksToLearn;
 
@@ -41,29 +43,23 @@ public class TaskActivity extends Activity {
         taskType = (TextView) findViewById(R.id.task_act_tv_task_type);
         question = (EditText) findViewById(R.id.task_act_et_question);
         answer = (TextView) findViewById(R.id.task_act_tv_answer);
-        rule = (TextView) findViewById(R.id.task_act_tv_rule);
+        rule = (WebView) findViewById(R.id.task_act_tv_rule);
 
         taskType.setText(aggregateTasksToLearn.get(currentTaskNumber).getTaskType());
         question.setText(aggregateTasksToLearn.get(currentTaskNumber).getQuestion());
         answer.setText(aggregateTasksToLearn.get(currentTaskNumber).getAnswer());
-        rule.setText(aggregateTasksToLearn.get(currentTaskNumber).getRuleId());
+
+        rule.setBackgroundColor(getResources().getColor(R.color.app_color_main));
+        rule.loadData(
+                Application.ruleCloudCrudDao.read(aggregateTasksToLearn.get(currentTaskNumber).getRuleId()).getRule(),
+                "text/html",
+                null);
 
         tip = (Button) findViewById(R.id.task_act_btn_tip);
         tip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(TaskActivity.this);
-                builder.setTitle("Tip")
-                        .setMessage(rule.getText())
-                        .setCancelable(false)
-                        .setNegativeButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-                AlertDialog alert = builder.create();
-                alert.show();
+                rule.setVisibility(View.VISIBLE);
             }
         });
 
@@ -82,7 +78,10 @@ public class TaskActivity extends Activity {
                         taskType.setText(aggregateTasksToLearn.get(currentTaskNumber).getTaskType());
                         question.setText(aggregateTasksToLearn.get(currentTaskNumber).getQuestion());
                         answer.setText(aggregateTasksToLearn.get(currentTaskNumber).getAnswer());
-                        rule.setText(aggregateTasksToLearn.get(currentTaskNumber).getRuleId());
+                        rule.loadData(
+                                Application.ruleCloudCrudDao.read(aggregateTasksToLearn.get(currentTaskNumber).getRuleId()).getRule(),
+                                "text/html",
+                                null);
 
                         answer.setVisibility(View.INVISIBLE);
                         rule.setVisibility(View.INVISIBLE);

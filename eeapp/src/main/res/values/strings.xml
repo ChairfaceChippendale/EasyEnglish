@@ -13,7 +13,7 @@
     <string name="vocab_act_btn_start_text">Start</string>
     <string name="title_activity_rule">Rule</string>
     <string name="rule_act_tv_title_text">Rule of gramma</string>
-    <string name="rule_act_tv_rule_text">There must be rule of gramma</string>
+    <string name="rule_act_wv_rule_text">There must be rule of gramma</string>
     <string name="gram_act_tv_title_text">Topics</string>
     <string name="gram_act_btn_start_text">Start test</string>
     <string name="title_activity_settings">Settings</string>

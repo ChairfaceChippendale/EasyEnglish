@@ -17,7 +17,6 @@
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:layout_alignParentTop="true">
 
-
         <ImageView
                 android:id="@+id/gram_act_img_go_back"
                 android:layout_width="wrap_content"
@@ -37,7 +36,7 @@
             android:layout_below="@id/gram_act_rl_top_menu"
             android:gravity="center"
             android:textSize="@dimen/gram_act_tv_title_text_size"
-            android:textColor="@color/gram_act_tv_title_text_color"
+            android:textColor="@color/app_color_black"
             android:text="@string/gram_act_tv_title_text"
             />
 
@@ -63,8 +62,6 @@
                 </ListView>
 
         </RelativeLayout>
-
-
 
     <LinearLayout
             android:id="@+id/gram_act_ll_bottom_menu"
@@ -96,9 +93,5 @@
                 android:text="@string/gram_act_btn_start_text"/>
 
     </LinearLayout>
-
-
-
-
 
 </RelativeLayout>
