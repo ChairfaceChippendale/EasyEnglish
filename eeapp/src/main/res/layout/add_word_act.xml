@@ -21,10 +21,10 @@
                 android:id="@+id/adw_act_img_go_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_alignParentLeft="true"
                 android:clickable="true"
-                android:src="@drawable/ic_exit_to_app_black_36dp"/>
+                android:src="@drawable/ic_keyboard_arrow_left_black_36dp"/>
 
     </RelativeLayout>
 

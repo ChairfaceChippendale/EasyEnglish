@@ -75,6 +75,19 @@ public class VocabularyActivity extends Activity {
 
         packsList.setAdapter(packsListAdapter);
 
+
+        packsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                return false;
+
+                //TODO
+                //http://developer.android.com/guide/topics/ui/menus.html
+
+            }
+        });
+
+
         addPack = (ImageView) findViewById(R.id.vocab_act_img_add);
         addPack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +96,8 @@ public class VocabularyActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+
 
         start = (Button) findViewById(R.id.vocab_act_btn_start);
         start.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +129,8 @@ public class VocabularyActivity extends Activity {
                 }
             }
         });
+
+
 
         goBack = (ImageView) findViewById(R.id.vocab_act_img_go_back);
         goBack.setOnClickListener(new View.OnClickListener() {

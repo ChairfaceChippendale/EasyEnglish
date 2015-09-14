@@ -14,7 +14,7 @@ import com.parse.ParseObject;
 public class MainActivity extends Activity {
 
     Button grammar, vocabulary;
-    ImageView goBack, settings;
+    ImageView goBack;
 
 
     @Override
@@ -56,14 +56,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        settings = (ImageView) findViewById(R.id.main_act_img_settings);
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
     }
 

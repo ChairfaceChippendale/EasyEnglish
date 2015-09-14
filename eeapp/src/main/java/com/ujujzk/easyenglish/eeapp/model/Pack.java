@@ -11,6 +11,8 @@ public class Pack extends Base {
     private List<Card> cards;
 
     public Pack() {
+        this.title = "";
+        this.cards = new ArrayList<Card>();
     }
 
     @Override
