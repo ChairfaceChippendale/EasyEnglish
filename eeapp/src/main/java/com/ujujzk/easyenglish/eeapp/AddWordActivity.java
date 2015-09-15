@@ -84,13 +84,9 @@ public class AddWordActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                //TODO-------------
-                //Check
-
-                Application.packLocalCrudDao.create(newPack);
-
-                //---------------
-
+                if (newPack.getTitle().length() >= WORD_MIN_LENGTH) {
+                    Application.packLocalCrudDao.createWithRelations(newPack);
+                }
 
                 finish();
             }

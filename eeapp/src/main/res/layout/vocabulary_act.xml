@@ -25,6 +25,15 @@
                 android:clickable="true"
                 android:src="@drawable/ic_add_circle_outline_black_36dp"/>
 
+            <ImageView
+                    android:id="@+id/vocab_act_img_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:layout_toLeftOf="@+id/vocab_act_img_add"
+                    android:clickable="true"
+                    android:src="@drawable/ic_remove_circle_outline_black_36dp"/>
+
         <ImageView
                 android:id="@+id/vocab_act_img_go_back"
                 android:layout_width="wrap_content"
@@ -33,6 +42,12 @@
                 android:layout_alignParentLeft="true"
                 android:clickable="true"
                 android:src="@drawable/ic_keyboard_arrow_left_black_36dp"/>
+
+
+
+
+
+
 <!--TODO
             <ImageView
                     android:id="@+id/vocab_act_img_cloud"
